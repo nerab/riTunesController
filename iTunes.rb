@@ -1,9 +1,9 @@
 require 'win32ole'
 
 #
-# Decorator for iTunes' OLE object. This class mainly exist to add
+# Decorator for iTunes' OLE object. This class mainly exists to add
 # some convenience methods to what the iTunes API provides. It also prevents
-# the OLE stuff leaking through.
+# the OLE stuff from leaking through.
 #
 # Being a decorator means that all methods that are not implemented here
 # are sent to the iTunes OLE object.
@@ -20,7 +20,7 @@ class ITunes
     @itunes = WIN32OLE.new('iTunes.Application') # the OLE object itself
 
     # Delegate to the OLE object
-    # see also http://blog.jayfields.com/2008/02/ruby-replace-methodmissing-with-dynamic.html
+    # from http://blog.jayfields.com/2008/02/ruby-replace-methodmissing-with-dynamic.html
     @itunes.public_methods(false).each do |meth|
       (class << self; self; end).class_eval do
         define_method meth do |*args|
@@ -33,7 +33,11 @@ class ITunes
     setup_events
   end
 
+  #
   # message loop
+  #
+  # This method will block until stop_message_loop is called
+  #
   def start_message_loop
     @stop_message_loop = false
 

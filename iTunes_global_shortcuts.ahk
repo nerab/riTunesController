@@ -50,6 +50,14 @@ return
 itunes("crossfade_to_previous", "Crossfading to previous track")
 return
 
+^!+B::
+itunes("NextTrack", "Skipping to next track")
+return
+
+^!+O::
+itunes("PreviousTrack", "Skipping to previous track")
+return
+
 ^!+T::
 itunes("toggle_visualizer", "Toggle Visualizer")
 return
